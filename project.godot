@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://CommandDots.gd"
 }, {
+"base": "Node",
+"class": "PathMover",
+"language": "GDScript",
+"path": "res://PathMover.gd"
+}, {
 "base": "Node2D",
 "class": "Rocks",
 "language": "GDScript",
@@ -54,6 +59,7 @@ _global_script_class_icons={
 "BirdNav": "",
 "CommandDot": "",
 "CommandDots": "",
+"PathMover": "",
 "Rocks": "",
 "Selection": "",
 "Tower": "",

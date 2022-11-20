@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://cat_anim.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Cat.gd" type="Script" id=2]
+[ext_resource path="res://PathMover.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 14, 14 )
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends AnimatedSprite
+
+func _on_PathMover_started_moving():
+	playing = true
+
+func _on_PathMover_destination_reached():
+	playing = false
+	frame = 0
+"
+
+[node name="Cat" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="PathMover" type="Node" parent="."]
+script = ExtResource( 3 )
+speed = 64.0
+
+[node name="InteractionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+input_pickable = false
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 1 )
+animation = "walk_right"
+script = SubResource( 2 )
+
+[connection signal="destination_reached" from="PathMover" to="AnimatedSprite" method="_on_PathMover_destination_reached"]
+[connection signal="started_moving" from="PathMover" to="AnimatedSprite" method="_on_PathMover_started_moving"]
