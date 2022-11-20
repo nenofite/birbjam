@@ -20,6 +20,16 @@ _global_script_classes=[ {
 "path": "res://BirdNav.gd"
 }, {
 "base": "Node2D",
+"class": "CommandDot",
+"language": "GDScript",
+"path": "res://CommandDot.gd"
+}, {
+"base": "Node2D",
+"class": "CommandDots",
+"language": "GDScript",
+"path": "res://CommandDots.gd"
+}, {
+"base": "Node2D",
 "class": "Rocks",
 "language": "GDScript",
 "path": "res://Rocks.gd"
@@ -42,6 +52,8 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Bird": "",
 "BirdNav": "",
+"CommandDot": "",
+"CommandDots": "",
 "Rocks": "",
 "Selection": "",
 "Tower": "",

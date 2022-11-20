@@ -7,7 +7,7 @@ func _on_Backdrop_gui_input(event: InputEvent) -> void:
 		if !selected: return
 		if selected.is_moving(): return
 		get_tree().set_input_as_handled()
-		var mouse := get_global_mouse_position()
+		var mouse := Util.snap_grid_center(get_global_mouse_position())
 		var spos := selected.global_position
 		var points = find_path(spos, mouse)
 		if points:
@@ -17,7 +17,7 @@ func _on_Backdrop_gui_input(event: InputEvent) -> void:
 		var selected := $"%Selection".current as Bird
 		if !selected: return
 		if selected.is_moving(): return
-		var mouse := get_global_mouse_position()
+		var mouse := Util.snap_grid_center(get_global_mouse_position())
 		var spos := selected.global_position
 		var points = find_path(spos, mouse)
 		if points:
@@ -31,6 +31,13 @@ func _on_Backdrop_mouse_exited() -> void:
 func find_path(start: Vector2, goal: Vector2):
 	var p := get_simple_path(start, goal, false)
 	if p.size() > 1:
+		var i := 0
+		while i < p.size():
+			p[i] = Util.snap_grid_center(p[i])
+			if i > 0 && p[i] == p[i-1]:
+				p.remove(i)
+			else:
+				i += 1
 		return p
 	else:
 		return null

@@ -83,6 +83,7 @@ func is_moving() -> bool:
 func start_path(goal: Vector2, path: Array) -> void:
 	current_path = path.duplicate()
 	commands.append(Command.to_goto(goal))
+	show_commands()
 	
 func trim_path(eps: float) -> void:
 	if current_path.size() == 0: return
@@ -98,10 +99,16 @@ func trim_path(eps: float) -> void:
 
 func on_selected() -> void:
 	($"%Selection" as Selection).select(self)
+	show_commands()
+	
+func on_deselected() -> void:
+	pass
 
-#func _on_Area2D_input_event(viewport, event, shape_idx):
-#	if event is InputEventMouseButton && event.pressed:
-#		on_selected()
+func show_commands() -> void:
+	var dots := $"%CommandDots"
+	dots.clear()
+	for i in range(commands.size()):
+		dots.show_command(i+1, commands[i])
 		
 func _on_Control_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton && event.pressed:
