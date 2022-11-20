@@ -2,11 +2,11 @@ class_name Tower
 extends Node2D
 
 export var rocks_needed := 10
-var rocks := 0 setget set_rocks
+var rocks: int setget set_rocks
 onready var recharge := $Recharge as Recharge
 
 func _ready():
-	set_rocks(rocks)
+	set_rocks(rocks_needed)
 
 func _interact(bird: Bird) -> void:
 	if bird.has_rock:

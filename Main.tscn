@@ -44,7 +44,7 @@ unique_name_in_owner = true
 script = ExtResource( 8 )
 
 [node name="Cat" parent="." instance=ExtResource( 3 )]
-position = Vector2( 80, 80 )
+position = Vector2( 912, 464 )
 
 [node name="Bird" parent="." instance=ExtResource( 2 )]
 position = Vector2( 240, 208 )
