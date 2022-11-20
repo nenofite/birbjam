@@ -48,6 +48,11 @@ move_to={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="walking"
+2d_physics/layer_2="interaction zones"
+
 [mono]
 
 project/assembly_name="birbjam"

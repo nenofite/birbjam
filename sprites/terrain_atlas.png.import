@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/forest_tiles.png-9b6fa29b63e4f8250a6a25812a30dd23.stex"
+path="res://.import/terrain_atlas.png-35a714f8c9aa2786f703f7674cd0b5fb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/forest_tiles.png"
-dest_files=[ "res://.import/forest_tiles.png-9b6fa29b63e4f8250a6a25812a30dd23.stex" ]
+source_file="res://sprites/terrain_atlas.png"
+dest_files=[ "res://.import/terrain_atlas.png-35a714f8c9aa2786f703f7674cd0b5fb.stex" ]
 
 [params]
 
