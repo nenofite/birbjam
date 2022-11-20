@@ -1,7 +1,7 @@
 class_name Selection
 extends Node
 
-var current: Bird
+var current: Node2D
 
 func _process(_delta):
 	if current:
@@ -10,7 +10,7 @@ func _process(_delta):
 func selector() -> Node2D:
 	return $"../Selector" as Node2D
 
-func select(n: Bird) -> void:
+func select(n: Node2D) -> void:
 	if current == n: return
 	current = n
 	if current:
