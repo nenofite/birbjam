@@ -16,22 +16,16 @@ onready var rock := $Rock as Node2D
 func _process(delta: float) -> void:
 	process_movement(delta)
 	if !is_moving():
-		var i := query_interaction()
-		if i:
-			# warning-ignore:unsafe_method_access
-			i._interact(self)
-		if running_commands:
-			current_command = (current_command + 1) % commands.size()
-			var cmd := commands[current_command] as Command
-			var nav := $"%BirdNav"
-			current_path = nav.find_path(global_position, cmd.goto)
+		process_interaction(delta)
+		process_commands(delta)
 			
 func _unhandled_key_input(event):
 	if !is_selected(): return
 	if event.is_action_released("repeat_commands"):
 		get_tree().set_input_as_handled()
-		if commands.size() > 0:
-			current_command = -1
+		if running_commands:
+			running_commands = false
+		elif commands.size() > 0:
 			running_commands = true
 		
 func is_selected() -> bool:
@@ -48,6 +42,22 @@ func process_movement(delta: float) -> void:
 			current_path.pop_front()
 		else:
 			position += diff.normalized() * speed * delta
+			
+func process_interaction(_delta: float) -> void:
+	var i := query_interaction()
+	if i:
+		# warning-ignore:unsafe_method_access
+		i._interact(self)
+		
+func process_commands(_delta: float) -> void:
+	if !running_commands: return
+	if commands.size() <= 1:
+		running_commands = false
+		return
+	current_command = (current_command + 1) % commands.size()
+	var cmd := commands[current_command] as Command
+	var nav := $"%BirdNav"
+	current_path = nav.find_path(global_position, cmd.goto)
 			
 func query_interaction() -> Node:
 	var overlaps := interaction.get_overlapping_areas()
@@ -100,19 +110,21 @@ func trim_path(eps: float) -> void:
 func on_selected() -> void:
 	($"%Selection" as Selection).select(self)
 	show_commands()
-	
-func on_deselected() -> void:
-	pass
 
 func show_commands() -> void:
 	var dots := $"%CommandDots"
 	dots.clear()
 	for i in range(commands.size()):
-		dots.show_command(i+1, commands[i])
+		var d := dots.show_command(i, commands[i]) as CommandDot
+		d.connect("command_removed", self, "_on_command_removed")
 		
 func _on_Control_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton && event.pressed:
 		on_selected()
+		
+func _on_command_removed(dot: CommandDot) -> void:
+	commands.remove(dot.idx)
+	show_commands()
 
 class Command:
 	extends Reference
