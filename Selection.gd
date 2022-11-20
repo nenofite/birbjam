@@ -8,7 +8,7 @@ func _process(_delta):
 		selector().onto(current)
 
 func selector() -> Node2D:
-	return $"../Selector" as Node2D
+	return $"%Selector" as Node2D
 
 func select(n: Node2D) -> void:
 	if current == n: return
