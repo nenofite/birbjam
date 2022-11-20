@@ -5,7 +5,7 @@
 [ext_resource path="res://PathMover.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 14, 14 )
+extents = Vector2( 12, 9.5 )
 
 [sub_resource type="GDScript" id=2]
 script/source = "extends AnimatedSprite
@@ -31,6 +31,7 @@ collision_mask = 2
 input_pickable = false
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="InteractionArea"]
+position = Vector2( 0, 1.5 )
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
