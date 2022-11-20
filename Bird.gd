@@ -8,7 +8,7 @@ var has_rock := false
 
 var commands := []
 var current_command := -1
-var running_commands := false
+var is_repeating := false
 
 onready var interaction := $InteractionArea as Area2D
 onready var rock := $Rock as Node2D
@@ -23,10 +23,10 @@ func _unhandled_key_input(event):
 	if !is_selected(): return
 	if event.is_action_released("repeat_commands"):
 		get_tree().set_input_as_handled()
-		if running_commands:
-			running_commands = false
+		if is_repeating:
+			set_repeating(false)
 		elif commands.size() > 0:
-			running_commands = true
+			set_repeating(true)
 		
 func is_selected() -> bool:
 	return ($"%Selection" as Selection).current == self
@@ -50,9 +50,9 @@ func process_interaction(_delta: float) -> void:
 		i._interact(self)
 		
 func process_commands(_delta: float) -> void:
-	if !running_commands: return
+	if !is_repeating: return
 	if commands.size() <= 1:
-		running_commands = false
+		set_repeating(false)
 		return
 	current_command = (current_command + 1) % commands.size()
 	var cmd := commands[current_command] as Command
@@ -65,6 +65,11 @@ func query_interaction() -> Node:
 		var p := find_interactable_parent(o)
 		if p: return p
 	return null
+	
+func set_repeating(r: bool) -> void:
+	if is_repeating == r: return
+	is_repeating = r
+	$Repeat.visible = r
 	
 func try_get_rock() -> void:
 	if is_moving(): return
