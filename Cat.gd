@@ -23,7 +23,7 @@ func find_and_kill():
 	var wait := get_tree().create_timer(rand_range(0.3, 1.0), false)
 	var bird := yield(find_nearest_bird(), "completed") as Node2D
 	yield(wait, "timeout")
-	if !bird: return
+	if !is_instance_valid(bird): return
 	mover.current_path = ($"%BirdNav" as BirdNav).find_path(global_position, bird.global_position)
 	yield(mover, "destination_reached")
 	print("completed find_and_kill")
@@ -42,4 +42,10 @@ func find_nearest_bird() -> Node2D:
 		else:
 			shortest = p
 			shortest_bird = b
+	yield(get_tree(), "idle_frame")
 	return shortest_bird
+
+func _on_InteractionArea_area_entered(area: Area2D) -> void:
+	var bird := Util.parent_in_group(area, "bird") as Node2D
+	if bird:
+		bird._on_attacked(self)

@@ -5,6 +5,10 @@ signal selection_changed(prev, current)
 
 var current: Node2D
 
+func _process(_delta):
+	if current && !is_instance_valid(current):
+		current = null
+
 func _unhandled_key_input(event) -> void:
 	if event.is_action_pressed("prev_bird"):
 		get_tree().set_input_as_handled()

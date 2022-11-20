@@ -1,6 +1,8 @@
 class_name Bird
 extends Node2D
 
+signal died()
+
 onready var mover := $"PathMover" as PathMover
 var has_rock := false
 
@@ -15,6 +17,11 @@ func _process(delta: float) -> void:
 	if !is_moving():
 		process_interaction(delta)
 		process_commands(delta)
+		
+func _on_attacked(_attacker: Node2D) -> void:
+	yield(get_tree().create_timer(0.5), "timeout")
+	emit_signal("died")
+	queue_free()
 			
 func _unhandled_key_input(event):
 	if !is_selected(): return
@@ -100,6 +107,7 @@ func show_commands() -> void:
 	dots.clear()
 	for i in range(commands.size()):
 		var d := dots.show_command(i, commands[i]) as CommandDot
+		connect("died", d, "queue_free")
 		d.connect("command_removed", self, "_on_command_removed")
 		
 func _on_Control_gui_input(event: InputEvent) -> void:
