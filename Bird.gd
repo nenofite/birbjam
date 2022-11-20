@@ -99,7 +99,11 @@ func trim_path(eps: float) -> void:
 func on_selected() -> void:
 	($"%Selection" as Selection).select(self)
 
-func _on_Area2D_input_event(viewport, event, shape_idx):
+#func _on_Area2D_input_event(viewport, event, shape_idx):
+#	if event is InputEventMouseButton && event.pressed:
+#		on_selected()
+		
+func _on_Control_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton && event.pressed:
 		on_selected()
 

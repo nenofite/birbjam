@@ -1,22 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://cardinal_anim.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Bird.gd" type="Script" id=2]
 [ext_resource path="res://sprites/rock.png" type="Texture" id=3]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16, 16 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 14, 14 )
 
 [node name="Bird" type="Node2D"]
 script = ExtResource( 2 )
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 1 )
 
 [node name="InteractionArea" type="Area2D" parent="."]
 collision_layer = 0
@@ -36,4 +28,10 @@ frames = ExtResource( 1 )
 animation = "flyright"
 playing = true
 
-[connection signal="input_event" from="Area2D" to="." method="_on_Area2D_input_event"]
+[node name="Control" type="Control" parent="."]
+margin_left = -16.0
+margin_top = -16.0
+margin_right = 16.0
+margin_bottom = 16.0
+
+[connection signal="gui_input" from="Control" to="." method="_on_Control_gui_input"]

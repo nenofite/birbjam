@@ -23,6 +23,12 @@ __meta__ = {
 unique_name_in_owner = true
 script = ExtResource( 4 )
 
+[node name="Backdrop" type="Control" parent="."]
+margin_left = -32.0
+margin_top = -32.0
+margin_right = 1056.0
+margin_bottom = 640.0
+
 [node name="BirdNav" type="Navigation2D" parent="."]
 unique_name_in_owner = true
 cell_size = 32.0
@@ -59,3 +65,6 @@ shape = SubResource( 2 )
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Rocks/InteractionArea"]
 position = Vector2( 80, -16 )
 shape = SubResource( 3 )
+
+[connection signal="gui_input" from="Backdrop" to="BirdNav" method="_on_Backdrop_gui_input"]
+[connection signal="mouse_exited" from="Backdrop" to="BirdNav" method="_on_Backdrop_mouse_exited"]
