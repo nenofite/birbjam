@@ -42,6 +42,9 @@ position = Vector2( 240, 208 )
 [node name="Bird2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 208, 272 )
 
+[node name="Bird3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 272, 304 )
+
 [node name="Dots" type="Node2D" parent="."]
 
 [node name="Rocks" type="Node2D" parent="."]
@@ -63,5 +66,6 @@ shape = SubResource( 3 )
 unique_name_in_owner = true
 script = ExtResource( 8 )
 
+[connection signal="selection_changed" from="Selection" to="BirdNav" method="_on_Selection_selection_changed"]
 [connection signal="gui_input" from="Backdrop" to="BirdNav" method="_on_Backdrop_gui_input"]
 [connection signal="mouse_exited" from="Backdrop" to="BirdNav" method="_on_Backdrop_mouse_exited"]

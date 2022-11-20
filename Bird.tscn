@@ -9,7 +9,7 @@
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 14, 14 )
 
-[node name="Bird" type="Node2D"]
+[node name="Bird" type="Node2D" groups=["bird"]]
 script = ExtResource( 2 )
 
 [node name="InteractionArea" type="Area2D" parent="."]
@@ -28,7 +28,7 @@ texture = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "flyright"
-frame = 1
+frame = 2
 playing = true
 
 [node name="Control" type="Control" parent="."]

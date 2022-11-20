@@ -27,7 +27,10 @@ func _on_Backdrop_gui_input(event: InputEvent) -> void:
 			
 func _on_Backdrop_mouse_exited() -> void:
 	hide_path()
-			
+	
+func _on_Selection_selection_changed(_prev, _current) -> void:
+	hide_path()
+
 func find_path(start: Vector2, goal: Vector2):
 	var p := get_simple_path(start, goal, false)
 	if p.size() > 1:

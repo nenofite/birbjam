@@ -111,9 +111,11 @@ func trim_path(eps: float) -> void:
 			current_path.pop_front()
 		else:
 			break
-
-func on_selected() -> void:
+			
+func select() -> void:
 	($"%Selection" as Selection).select(self)
+
+func _on_selected() -> void:
 	show_commands()
 	$Selector.show()
 	
@@ -129,7 +131,7 @@ func show_commands() -> void:
 		
 func _on_Control_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton && event.pressed:
-		on_selected()
+		select()
 		
 func _on_command_removed(dot: CommandDot) -> void:
 	commands.remove(dot.idx)
