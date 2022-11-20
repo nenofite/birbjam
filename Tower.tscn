@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Tower.gd" type="Script" id=2]
 [ext_resource path="res://sprites/rock.png" type="Texture" id=3]
+[ext_resource path="res://Recharge.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 64, 48 )
@@ -10,6 +11,9 @@ extents = Vector2( 64, 48 )
 [node name="Tower" type="Node2D"]
 position = Vector2( 160, 192 )
 script = ExtResource( 2 )
+
+[node name="Recharge" type="Node" parent="."]
+script = ExtResource( 4 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
@@ -47,3 +51,6 @@ mouse_filter = 2
 texture = ExtResource( 3 )
 expand = true
 stretch_mode = 6
+
+[node name="ProjectileOrigin" type="Position2D" parent="."]
+position = Vector2( 0, -65 )

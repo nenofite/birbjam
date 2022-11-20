@@ -33,7 +33,7 @@ texture = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "flyright"
-frame = 2
+frame = 1
 playing = true
 
 [node name="Control" type="Control" parent="."]

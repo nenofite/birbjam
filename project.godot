@@ -35,6 +35,16 @@ _global_script_classes=[ {
 "path": "res://PathMover.gd"
 }, {
 "base": "Node2D",
+"class": "Projectile",
+"language": "GDScript",
+"path": "res://Projectile.gd"
+}, {
+"base": "Node",
+"class": "Recharge",
+"language": "GDScript",
+"path": "res://Recharge.gd"
+}, {
+"base": "Node2D",
 "class": "Rocks",
 "language": "GDScript",
 "path": "res://Rocks.gd"
@@ -60,6 +70,8 @@ _global_script_class_icons={
 "CommandDot": "",
 "CommandDots": "",
 "PathMover": "",
+"Projectile": "",
+"Recharge": "",
 "Rocks": "",
 "Selection": "",
 "Tower": "",

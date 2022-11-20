@@ -18,7 +18,7 @@ func _on_PathMover_destination_reached():
 	frame = 0
 "
 
-[node name="Cat" type="Node2D"]
+[node name="Cat" type="Node2D" groups=["cat"]]
 script = ExtResource( 2 )
 
 [node name="PathMover" type="Node" parent="."]
