@@ -1,12 +1,16 @@
 class_name Selection
 extends Node
 
-var current: Node2D
+var current: Bird
+
+func _process(_delta):
+	if current:
+		selector().onto(current)
 
 func selector() -> Node2D:
 	return $"../Selector" as Node2D
 
-func select(n: Node2D) -> void:
+func select(n: Bird) -> void:
 	if current == n: return
 	current = n
 	if current:
@@ -14,6 +18,6 @@ func select(n: Node2D) -> void:
 	else:
 		selector().hide()
 
-func _unhandled_input(event):
-	if event is InputEventMouseButton && event.pressed:
-		select(null)
+#func _unhandled_input(event):
+#	if event is InputEventMouseButton && event.pressed:
+#		select(null)
