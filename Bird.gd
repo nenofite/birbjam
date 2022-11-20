@@ -16,6 +16,9 @@ func _process(delta: float) -> void:
 			current_path.pop_front()
 		else:
 			position += diff.normalized() * speed * delta
+			
+func is_moving() -> bool:
+	return current_path.size() > 0
 
 func start_path(path: Array) -> void:
 	current_path = path.duplicate()
