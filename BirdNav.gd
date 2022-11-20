@@ -32,16 +32,16 @@ func _on_Selection_selection_changed(_prev, _current) -> void:
 	hide_path()
 
 func find_path(start: Vector2, goal: Vector2):
+	var eps := 32
 	goal = Util.snap_grid_center(goal)
-	var p := get_simple_path(start, goal, false)
-	if p.size() > 1:
-#		var i := 0
-#		while i < p.size():
-#			p[i] = Util.snap_grid_center(p[i])
-#			if i > 0 && p[i] == p[i-1]:
-#				p.remove(i)
-#			else:
-#				i += 1
+	var p := get_simple_path(start, goal, true)
+	if p.size() > 1 && p[p.size()-1] == goal:
+		var i := 0
+		while i < p.size():
+			if i > 0 && i < p.size() - 1 && (p[i] - p[i-1]).length() <= eps:
+				p.remove(i)
+			else:
+				i += 1
 		return p
 	else:
 		return null

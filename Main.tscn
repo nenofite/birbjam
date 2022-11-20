@@ -30,8 +30,8 @@ margin_bottom = 640.0
 
 [node name="BirdNav" type="Navigation2D" parent="."]
 unique_name_in_owner = true
-cell_size = 32.0
-edge_connection_margin = 32.0
+cell_size = 4.0
+edge_connection_margin = 2.0
 script = ExtResource( 7 )
 
 [node name="Map1" parent="BirdNav" instance=ExtResource( 1 )]
