@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bird_2_cardinal.png-05e1c3f9a3a07dffcc10a56f08fd14e4.stex"
+path="res://.import/rock.png-df3db6a52b5550609cfe72347aaf985f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/bird_2_cardinal.png"
-dest_files=[ "res://.import/bird_2_cardinal.png-05e1c3f9a3a07dffcc10a56f08fd14e4.stex" ]
+source_file="res://sprites/rock.png"
+dest_files=[ "res://.import/rock.png-df3db6a52b5550609cfe72347aaf985f.stex" ]
 
 [params]
 

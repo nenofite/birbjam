@@ -39,11 +39,13 @@ func try_get_rock() -> void:
 	if is_moving(): return
 	if has_rock: return
 	has_rock = true
+	$Rock.show()
 	print("Got a rock!")
 	
 func remove_rock() -> void:
 	if !has_rock: return
 	has_rock = false
+	$Rock.hide()
 	print("No more rock!")
 	
 func find_interactable_parent(n: Node) -> Node:
