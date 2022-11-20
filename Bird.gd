@@ -115,6 +115,10 @@ func trim_path(eps: float) -> void:
 func on_selected() -> void:
 	($"%Selection" as Selection).select(self)
 	show_commands()
+	$Selector.show()
+	
+func _on_deselected() -> void:
+	$Selector.hide()
 
 func show_commands() -> void:
 	var dots := $"%CommandDots"
