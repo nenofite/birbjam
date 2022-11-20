@@ -1,6 +1,6 @@
 extends Node2D
 
-signal destination_reached()
+signal died()
 
 var async_action
 var target: Node2D
@@ -11,6 +11,11 @@ func _process(_delta):
 		target = null
 	if !async_action:
 		run_async_action()
+		
+func _on_hit(p: Projectile) -> void:
+	p.queue_free()
+	emit_signal("died")
+	queue_free()
 		
 func run_async_action():
 	if async_action: return
@@ -47,5 +52,6 @@ func find_nearest_bird() -> Node2D:
 
 func _on_InteractionArea_area_entered(area: Area2D) -> void:
 	var bird := Util.parent_in_group(area, "bird") as Node2D
-	if bird:
-		bird._on_attacked(self)
+	if bird: bird._on_attacked(self)
+	var projectile := Util.parent_in_group(area, "projectile") as Projectile
+	if projectile: _on_hit(projectile)

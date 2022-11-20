@@ -7,6 +7,9 @@ export var rocks_needed := 10
 var rocks := 0
 onready var recharge := $Recharge as Recharge
 
+func _ready() -> void:
+	recharge.reset(cooldown)
+
 func _interact(bird: Bird) -> void:
 	if bird.has_rock:
 		bird.remove_rock()
