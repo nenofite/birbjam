@@ -1,31 +1,28 @@
 class_name Tower
 extends Node2D
 
-const cooldown := 5
-
 export var rocks_needed := 10
-var rocks := 0
+var rocks := 0 setget set_rocks
 onready var recharge := $Recharge as Recharge
 
-func _ready() -> void:
-	recharge.reset(cooldown)
+func _ready():
+	set_rocks(rocks)
 
 func _interact(bird: Bird) -> void:
 	if bird.has_rock:
 		bird.remove_rock()
-		rocks += 1
+		set_rocks(rocks + 1)
 
 func _process(_delta):
-	var pb := $ProgressBar as ProgressBar
-	pb.value = clamp(rocks / float(rocks_needed), 0, 1)
 	try_fire_at_cat()
 
 func try_fire_at_cat() -> void:
 	if !recharge.is_charged: return
-#	if rocks == 0: return
+	if rocks == 0: return
 	var target := find_nearest_cat()
 	if is_instance_valid(target):
-		recharge.reset(cooldown)
+		recharge.reset()
+		set_rocks(rocks - 1)
 		fire_at(target.global_position)
 	
 func find_nearest_cat() -> Node2D:
@@ -44,3 +41,9 @@ func fire_at(pos: Vector2) -> void:
 	var p := preload("res://Projectile.tscn").instance() as Projectile
 	$"/root/Main".get_node("%Projectiles").add_child(p)
 	p.fire(origin, pos - origin)
+
+func set_rocks(r: int) -> void:
+	rocks = r
+	var pb := $ProgressBar as ProgressBar
+	pb.value = clamp(rocks / float(rocks_needed), 0, 1)
+	recharge.powered = rocks > 0

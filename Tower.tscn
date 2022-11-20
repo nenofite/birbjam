@@ -14,6 +14,9 @@ script = ExtResource( 2 )
 
 [node name="Recharge" type="Node" parent="."]
 script = ExtResource( 4 )
+is_charged = false
+powered = false
+cooldown = 5.0
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
