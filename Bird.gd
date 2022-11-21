@@ -68,7 +68,13 @@ func try_get_rock() -> void:
 	if has_rock: return
 	has_rock = true
 	rock.show()
-	print("Got a rock!")
+	
+func try_drop_rock() -> void:
+	if !has_rock: return
+	has_rock = false
+	rock.hide()
+	var dropped := preload("res://Rock.tscn").instance() as Node2D
+	
 	
 func remove_rock() -> void:
 	if !has_rock: return

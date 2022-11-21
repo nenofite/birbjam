@@ -13,8 +13,17 @@ func _interact(bird: Bird) -> void:
 		bird.remove_rock()
 		set_rocks(rocks + 1)
 
-func _process(_delta):
+func _physics_process(_delta):
+	try_collect_rocks()
 	try_fire_at_cat()
+	
+func try_collect_rocks() -> void:
+	for c in ($BuildArea as Area2D).get_overlapping_areas():
+		var rock := Util.parent_of_class(c, Rock) as Rock
+		if !is_instance_valid(rock): continue
+		if rock.taken: continue
+		rock._on_collected(global_position)
+		set_rocks(rocks + 1)
 
 func try_fire_at_cat() -> void:
 	if !recharge.is_charged: return

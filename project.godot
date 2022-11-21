@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://CommandDots.gd"
 }, {
+"base": "Node2D",
+"class": "Conveyor",
+"language": "GDScript",
+"path": "res://Conveyor.gd"
+}, {
 "base": "Node",
 "class": "PathMover",
 "language": "GDScript",
@@ -43,6 +48,11 @@ _global_script_classes=[ {
 "class": "Recharge",
 "language": "GDScript",
 "path": "res://Recharge.gd"
+}, {
+"base": "Node2D",
+"class": "Rock",
+"language": "GDScript",
+"path": "res://Rock.gd"
 }, {
 "base": "Node2D",
 "class": "Rocks",
@@ -69,9 +79,11 @@ _global_script_class_icons={
 "BirdNav": "",
 "CommandDot": "",
 "CommandDots": "",
+"Conveyor": "",
 "PathMover": "",
 "Projectile": "",
 "Recharge": "",
+"Rock": "",
 "Rocks": "",
 "Selection": "",
 "Tower": "",

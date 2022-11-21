@@ -19,3 +19,10 @@ static func parent_in_group(node: Node, group: String) -> Node:
 			return node
 		node = node.get_parent()
 	return null
+
+static func parent_of_class(node: Node, klass) -> Node:
+	while node:
+		if node is klass:
+			return node
+		node = node.get_parent()
+	return null
