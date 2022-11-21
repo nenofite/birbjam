@@ -9,9 +9,7 @@ func _ready():
 	set_rocks(rocks_needed)
 
 func _interact(bird: Bird) -> void:
-	if bird.has_rock:
-		bird.remove_rock()
-		set_rocks(rocks + 1)
+	bird.try_drop_rock()
 
 func _physics_process(_delta):
 	try_collect_rocks()
@@ -21,7 +19,7 @@ func try_collect_rocks() -> void:
 	for c in ($BuildArea as Area2D).get_overlapping_areas():
 		var rock := Util.parent_of_class(c, Rock) as Rock
 		if !is_instance_valid(rock): continue
-		if rock.taken: continue
+		if rock.taken || rock.on_conveyor: continue
 		rock._on_collected(global_position)
 		set_rocks(rocks + 1)
 

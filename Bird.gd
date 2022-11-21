@@ -74,13 +74,8 @@ func try_drop_rock() -> void:
 	has_rock = false
 	rock.hide()
 	var dropped := preload("res://Rock.tscn").instance() as Node2D
-	
-	
-func remove_rock() -> void:
-	if !has_rock: return
-	has_rock = false
-	rock.hide()
-	print("No more rock!")
+	$"/root/Main".get_node("%Rocks").add_child(dropped)
+	dropped.global_position = global_position
 	
 func find_interactable_parent(n: Node) -> Node:
 	while n:

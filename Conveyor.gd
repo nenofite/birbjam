@@ -15,6 +15,9 @@ func _ready():
 func _force_on(item: Node2D) -> Vector2:
 	var toward := global_position + direction * 32
 	return (toward - item.global_position).normalized()
+	
+func _interact(b) -> void:
+	b.try_drop_rock()
 
 func update_sprite() -> void:
 	var s := $Sprite as Sprite

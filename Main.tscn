@@ -30,6 +30,9 @@ margin_left = -32.0
 margin_top = -32.0
 margin_right = 1056.0
 margin_bottom = 640.0
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="BirdNav" type="Navigation2D" parent="."]
 unique_name_in_owner = true
@@ -44,6 +47,56 @@ script = ExtResource( 7 )
 [node name="Conveyor" parent="Conveyors" instance=ExtResource( 5 )]
 position = Vector2( 336, 368 )
 dir = 3
+
+[node name="Conveyor11" parent="Conveyors" instance=ExtResource( 5 )]
+position = Vector2( 688, 432 )
+dir = 3
+
+[node name="Conveyor12" parent="Conveyors" instance=ExtResource( 5 )]
+position = Vector2( 656, 432 )
+dir = 3
+
+[node name="Conveyor13" parent="Conveyors" instance=ExtResource( 5 )]
+position = Vector2( 624, 432 )
+dir = 3
+
+[node name="Conveyor14" parent="Conveyors" instance=ExtResource( 5 )]
+position = Vector2( 592, 432 )
+dir = 3
+
+[node name="Conveyor15" parent="Conveyors" instance=ExtResource( 5 )]
+position = Vector2( 560, 432 )
+dir = 3
+
+[node name="Conveyor16" parent="Conveyors" instance=ExtResource( 5 )]
+position = Vector2( 528, 432 )
+dir = 3
+
+[node name="Conveyor17" parent="Conveyors" instance=ExtResource( 5 )]
+position = Vector2( 496, 432 )
+dir = 3
+
+[node name="Conveyor18" parent="Conveyors" instance=ExtResource( 5 )]
+position = Vector2( 464, 432 )
+dir = 3
+
+[node name="Conveyor19" parent="Conveyors" instance=ExtResource( 5 )]
+position = Vector2( 432, 432 )
+dir = 3
+
+[node name="Conveyor20" parent="Conveyors" instance=ExtResource( 5 )]
+position = Vector2( 400, 432 )
+dir = 3
+
+[node name="Conveyor21" parent="Conveyors" instance=ExtResource( 5 )]
+position = Vector2( 368, 368 )
+dir = 3
+
+[node name="Conveyor22" parent="Conveyors" instance=ExtResource( 5 )]
+position = Vector2( 368, 432 )
+
+[node name="Conveyor23" parent="Conveyors" instance=ExtResource( 5 )]
+position = Vector2( 368, 400 )
 
 [node name="Conveyor2" parent="Conveyors" instance=ExtResource( 5 )]
 position = Vector2( 304, 368 )
@@ -76,6 +129,9 @@ position = Vector2( 176, 272 )
 [node name="Conveyor10" parent="Conveyors" instance=ExtResource( 5 )]
 position = Vector2( 176, 240 )
 
+[node name="Rocks" type="Node2D" parent="."]
+unique_name_in_owner = true
+
 [node name="Dots" type="Node2D" parent="."]
 
 [node name="CommandDots" type="Node2D" parent="."]
@@ -83,7 +139,7 @@ unique_name_in_owner = true
 script = ExtResource( 8 )
 
 [node name="Cat" parent="." instance=ExtResource( 3 )]
-position = Vector2( 912, 464 )
+position = Vector2( 496, 208 )
 
 [node name="Bird" parent="." instance=ExtResource( 2 )]
 position = Vector2( 240, 208 )
@@ -92,7 +148,7 @@ position = Vector2( 240, 208 )
 position = Vector2( 208, 272 )
 
 [node name="Bird3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 272, 304 )
+position = Vector2( 720, 368 )
 
 [node name="Quarry" type="Node2D" parent="."]
 position = Vector2( 800, 448 )
