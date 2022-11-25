@@ -12,7 +12,7 @@ func _on_Backdrop_gui_input(event: InputEvent) -> void:
 		get_tree().set_input_as_handled()
 		if hint.is_colliding(): return
 		var pos := hint.global_position
-		var conv := preload("res://Conveyor.tscn").instance() as Conveyor
+		var conv := preload("res://ConstructionSite.tscn").instance() as Node2D
 		$"%Conveyors".add_child(conv)
 		conv.global_position = pos
 		conv.set_dir(dir)

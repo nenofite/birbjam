@@ -38,10 +38,13 @@ func is_selected() -> bool:
 	return ($"%Selection" as Selection).current == self
 			
 func process_interaction(_delta: float) -> void:
-	var i := query_interaction()
-	if i:
-		# warning-ignore:unsafe_method_access
-		i._interact(self)
+	var overlaps := interaction.get_overlapping_areas()
+	for o in overlaps:
+		var p := find_interactable_parent(o)
+		if p:
+			# warning-ignore:unsafe_method_access
+			p._interact(self)
+			return
 		
 func process_commands(_delta: float) -> void:
 	if !is_repeating: return
@@ -52,13 +55,6 @@ func process_commands(_delta: float) -> void:
 	var cmd := commands[current_command] as Command
 	var nav := $"%BirdNav"
 	mover.current_path = nav.find_path(global_position, cmd.goto)
-			
-func query_interaction() -> Node:
-	var overlaps := interaction.get_overlapping_areas()
-	for o in overlaps:
-		var p := find_interactable_parent(o)
-		if p: return p
-	return null
 	
 func set_repeating(r: bool) -> void:
 	if is_repeating == r: return
