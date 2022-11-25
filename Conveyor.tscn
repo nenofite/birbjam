@@ -19,7 +19,7 @@ hframes = 2
 vframes = 2
 
 [node name="InteractionArea" type="Area2D" parent="."]
-collision_layer = 2
+collision_layer = 3
 collision_mask = 2
 input_pickable = false
 

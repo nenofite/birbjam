@@ -32,5 +32,5 @@ func select(n: Node2D) -> void:
 		current._on_deselected()
 	var prev := current
 	current = n
-	current._on_selected()
+	if n: n._on_selected()
 	emit_signal("selection_changed", prev, current)
