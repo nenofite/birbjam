@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Conveyor.gd"
 }, {
+"base": "Node2D",
+"class": "Log",
+"language": "GDScript",
+"path": "res://Log.gd"
+}, {
 "base": "Node",
 "class": "PathMover",
 "language": "GDScript",
@@ -80,6 +85,7 @@ _global_script_class_icons={
 "CommandDot": "",
 "CommandDots": "",
 "Conveyor": "",
+"Log": "",
 "PathMover": "",
 "Projectile": "",
 "Recharge": "",

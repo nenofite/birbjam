@@ -5,6 +5,7 @@ signal died()
 
 onready var mover := $"PathMover" as PathMover
 var has_rock := false
+var has_log := false
 
 var commands := []
 var current_command := -1
@@ -12,6 +13,7 @@ var is_repeating := false
 
 onready var interaction := $InteractionArea as Area2D
 onready var rock := $Rock as Node2D
+onready var log_ := $Log as Node2D
 
 func _process(delta: float) -> void:
 	if !is_moving():
@@ -63,19 +65,32 @@ func set_repeating(r: bool) -> void:
 	is_repeating = r
 	$Repeat.visible = r
 	
+func is_carrying() -> bool:
+	return has_log || has_rock
+	
 func try_get_rock() -> void:
-	if is_moving(): return
-	if has_rock: return
+	if is_moving() || is_carrying(): return
 	has_rock = true
 	rock.show()
 	
-func try_drop_rock() -> void:
-	if !has_rock: return
-	has_rock = false
-	rock.hide()
-	var dropped := preload("res://Rock.tscn").instance() as Node2D
-	$"/root/Main".get_node("%Rocks").add_child(dropped)
-	dropped.global_position = global_position
+func try_get_wood() -> void:
+	if is_moving() || is_carrying(): return
+	has_log = true
+	log_.show()
+	
+func try_drop() -> void:
+	if has_rock:
+		has_rock = false
+		rock.hide()
+		var dropped := preload("res://Rock.tscn").instance() as Node2D
+		$"/root/Main".get_node("%Rocks").add_child(dropped)
+		dropped.global_position = global_position
+	elif has_log:
+		has_log = false
+		log_.hide()
+		var dropped := preload("res://Log.tscn").instance() as Node2D
+		$"/root/Main".get_node("%Rocks").add_child(dropped)
+		dropped.global_position = global_position
 	
 func find_interactable_parent(n: Node) -> Node:
 	while n:

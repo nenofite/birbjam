@@ -9,7 +9,7 @@ func _ready():
 	set_rocks(rocks_needed)
 
 func _interact(bird: Bird) -> void:
-	bird.try_drop_rock()
+	bird.try_drop()
 
 func _physics_process(_delta):
 	try_collect_rocks()

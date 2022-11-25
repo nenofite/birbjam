@@ -17,7 +17,7 @@ func _force_on(item: Node2D) -> Vector2:
 	return (toward - item.global_position).normalized()
 	
 func _interact(b) -> void:
-	b.try_drop_rock()
+	b.try_drop()
 
 func update_sprite() -> void:
 	var s := $Sprite as Sprite
