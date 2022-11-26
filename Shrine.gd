@@ -3,7 +3,7 @@ extends Node2D
 
 signal filled()
 
-export var logs_needed := 1
+export var logs_needed := 100
 
 var logs: int setget set_logs
 onready var buildArea := $BuildArea as Area2D
