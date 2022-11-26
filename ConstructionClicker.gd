@@ -28,6 +28,18 @@ func _on_Backdrop_gui_input(event: InputEvent) -> void:
 		var pos := Util.snap_grid_center(get_global_mouse_position())
 		hint.global_position = pos
 		hint.show()
+		
+			
+func _unhandled_key_input(event):
+	if !active: return
+	if event.is_action_pressed("build_next_dir"):
+		get_tree().set_input_as_handled()
+		dir = posmod(dir + 1, 4)
+		hint.set_dir(dir)
+	elif event.is_action_pressed("build_prev_dir"):
+		get_tree().set_input_as_handled()
+		dir = posmod(dir - 1, 4)
+		hint.set_dir(dir)
 			
 func _on_Backdrop_mouse_exited() -> void:
 	hint.hide()
