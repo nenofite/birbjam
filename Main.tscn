@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://maps/map1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Bird.tscn" type="PackedScene" id=2]
@@ -13,6 +13,32 @@
 [ext_resource path="res://NavigationClicker.gd" type="Script" id=11]
 [ext_resource path="res://ConstructionClicker.gd" type="Script" id=12]
 [ext_resource path="res://ConveyorHint.tscn" type="PackedScene" id=13]
+[ext_resource path="res://sprites/bird_2_cardinal.png" type="Texture" id=14]
+[ext_resource path="res://fonts/PressStart2P-Regular.ttf" type="DynamicFontData" id=15]
+
+[sub_resource type="GDScript" id=12]
+script/source = "extends Node
+
+signal won()
+signal lost()
+
+func _ready() -> void:
+	for s in get_tree().get_nodes_in_group(\"shrine\"):
+		(s as Node).connect(\"filled\", self, \"_on_won\")
+		
+func _physics_process(_delta):
+	var birds := get_tree().get_nodes_in_group(\"bird\")
+	if birds.empty():
+		_on_lost()
+		
+func _on_won() -> void:
+	emit_signal(\"won\")
+	get_tree().paused = true
+
+func _on_lost() -> void:
+	emit_signal(\"lost\")
+	get_tree().paused = true
+"
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 64, 32 )
@@ -27,10 +53,55 @@ extents = Vector2( 48, 32 )
 atlas = ExtResource( 10 )
 region = Rect2( 0, 0, 32, 32 )
 
+[sub_resource type="GDScript" id=9]
+script/source = "extends CenterContainer
+
+func _on_won() -> void:
+	show()
+"
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.29, 0.0145, 0, 1 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0.866667, 0.0980392, 0.113725, 1 )
+shadow_size = 10
+shadow_offset = Vector2( 0, 5 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 14 )
+region = Rect2( 32, 224, 32, 32 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 32
+font_data = ExtResource( 15 )
+
+[sub_resource type="GDScript" id=11]
+script/source = "extends CenterContainer
+
+func _on_lost() -> void:
+	show()
+"
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0, 0.0941176, 0.141176, 1 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0.0823529, 0.423529, 0.6, 1 )
+shadow_size = 10
+shadow_offset = Vector2( 0, 5 )
+
 [node name="Main" type="Node2D"]
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="WinLose" type="Node" parent="."]
+script = SubResource( 12 )
 
 [node name="Selection" type="Node" parent="."]
 unique_name_in_owner = true
@@ -184,6 +255,106 @@ mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="WinLoseLayer" type="CanvasLayer" parent="."]
+pause_mode = 2
+layer = 2
+
+[node name="WinOverlay" type="CenterContainer" parent="WinLoseLayer"]
+pause_mode = 2
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = SubResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="WinLoseLayer/WinOverlay"]
+margin_left = 509.0
+margin_top = 297.0
+margin_right = 515.0
+margin_bottom = 303.0
+custom_styles/panel = SubResource( 6 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="WinLoseLayer/WinOverlay/PanelContainer"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 377.0
+margin_bottom = 103.0
+
+[node name="TextureRect" type="TextureRect" parent="WinLoseLayer/WinOverlay/PanelContainer/HBoxContainer"]
+margin_right = 100.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+texture = SubResource( 7 )
+expand = true
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="WinLoseLayer/WinOverlay/PanelContainer/HBoxContainer"]
+margin_left = 104.0
+margin_top = 34.0
+margin_right = 360.0
+margin_bottom = 66.0
+custom_fonts/font = SubResource( 8 )
+text = "Success!"
+
+[node name="Spacer" type="Control" parent="WinLoseLayer/WinOverlay/PanelContainer/HBoxContainer"]
+margin_left = 364.0
+margin_right = 374.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 10, 0 )
+
+[node name="LoseOverlay" type="CenterContainer" parent="WinLoseLayer"]
+pause_mode = 2
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = SubResource( 11 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="WinLoseLayer/LoseOverlay"]
+margin_left = 509.0
+margin_top = 297.0
+margin_right = 515.0
+margin_bottom = 303.0
+custom_styles/panel = SubResource( 10 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="WinLoseLayer/LoseOverlay/PanelContainer"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 345.0
+margin_bottom = 103.0
+
+[node name="TextureRect" type="TextureRect" parent="WinLoseLayer/LoseOverlay/PanelContainer/HBoxContainer"]
+modulate = Color( 0.42, 0.42, 0.42, 1 )
+margin_right = 100.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+texture = SubResource( 7 )
+expand = true
+stretch_mode = 5
+flip_v = true
+
+[node name="Label" type="Label" parent="WinLoseLayer/LoseOverlay/PanelContainer/HBoxContainer"]
+margin_left = 104.0
+margin_top = 34.0
+margin_right = 328.0
+margin_bottom = 66.0
+custom_fonts/font = SubResource( 8 )
+text = "Failure"
+
+[node name="Spacer" type="Control" parent="WinLoseLayer/LoseOverlay/PanelContainer/HBoxContainer"]
+margin_left = 332.0
+margin_right = 342.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 10, 0 )
+
+[connection signal="lost" from="WinLose" to="WinLoseLayer/LoseOverlay" method="_on_lost"]
+[connection signal="won" from="WinLose" to="WinLoseLayer/WinOverlay" method="_on_won"]
 [connection signal="selection_changed" from="Selection" to="NavigationClicker" method="_on_Selection_selection_changed"]
 [connection signal="gui_input" from="Backdrop" to="NavigationClicker" method="_on_Backdrop_gui_input"]
 [connection signal="gui_input" from="Backdrop" to="ConstructionClicker" method="_on_Backdrop_gui_input"]

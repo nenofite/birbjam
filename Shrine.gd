@@ -1,11 +1,14 @@
 class_name Shrine
 extends Node2D
 
-export var logs_needed := 100
+signal filled()
+
+export var logs_needed := 1
 
 var logs: int setget set_logs
 onready var buildArea := $BuildArea as Area2D
 onready var pb := $ProgressBar as ProgressBar
+var already_filled := false
 
 func _ready():
 	set_logs(0)
@@ -27,3 +30,6 @@ func try_collect_logs() -> void:
 func set_logs(r: int) -> void:
 	logs = r
 	pb.value = clamp(logs / float(logs_needed), 0, 1)
+	if logs >= logs_needed && !already_filled:
+		already_filled = true
+		emit_signal("filled")
